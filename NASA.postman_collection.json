@@ -1,0 +1,565 @@
+{
+	"info": {
+		"_postman_id": "f8aef6da-6cd3-4fc7-a87f-557c195e1b9a",
+		"name": "NASA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "28224987"
+	},
+	"item": [
+		{
+			"name": "Today",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code 200\", function () {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"copyright\", function(){",
+							"    const copyright = pm.response.json().copyright;",
+							"    pm.expect(typeof(copyright)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"date\", function(){",
+							"    const date = pm.response.json().date;",
+							"    pm.expect(typeof(date)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"explanation\", function(){",
+							"    const explanation = pm.response.json().explanation;",
+							"    pm.expect(typeof(explanation)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"hdurl\", function(){",
+							"    const hdurl = pm.response.json().hdurl;",
+							"    pm.expect(typeof(hdurl)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"media_type\", function(){",
+							"    const media_type = pm.response.json().media_type;",
+							"    pm.expect(typeof(media_type)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"service_version\", function(){",
+							"    const service_version = pm.response.json().service_version;",
+							"    pm.expect(typeof(service_version)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"title\", function(){",
+							"    const title = pm.response.json().title;",
+							"    pm.expect(typeof(title)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"url\", function(){",
+							"    const url = pm.response.json().url;",
+							"    pm.expect(typeof(url)).to.eql('string');",
+							"} );"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"apod\", \"https://api.nasa.gov/planetary/apod\");",
+							"pm.environment.set(\"key_nasa\", \"DyPmd2xRBk0Qb9tqf1rLTsPZW9UnNC5mqfnawvOa\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apod}}?api_key={{key_nasa}}",
+					"host": [
+						"{{apod}}"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "{{key_nasa}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Date",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"apod\", \"https://api.nasa.gov/planetary/apod\");",
+							"pm.environment.set(\"key_nasa\", \"DyPmd2xRBk0Qb9tqf1rLTsPZW9UnNC5mqfnawvOa\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code 200\", function () {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"copyright\", function(){",
+							"    const copyright = pm.response.json().copyright;",
+							"    pm.expect(typeof(copyright)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"date\", function(){",
+							"    const date = pm.response.json().date;",
+							"    pm.expect(typeof(date)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"explanation\", function(){",
+							"    const explanation = pm.response.json().explanation;",
+							"    pm.expect(typeof(explanation)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"hdurl\", function(){",
+							"    const hdurl = pm.response.json().hdurl;",
+							"    pm.expect(typeof(hdurl)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"media_type\", function(){",
+							"    const media_type = pm.response.json().media_type;",
+							"    pm.expect(typeof(media_type)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"service_version\", function(){",
+							"    const service_version = pm.response.json().service_version;",
+							"    pm.expect(typeof(service_version)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"title\", function(){",
+							"    const title = pm.response.json().title;",
+							"    pm.expect(typeof(title)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"url\", function(){",
+							"    const url = pm.response.json().url;",
+							"    pm.expect(typeof(url)).to.eql('string');",
+							"} );"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apod}}?date=2023-07-01&api_key={{key_nasa}}",
+					"host": [
+						"{{apod}}"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2023-07-01"
+						},
+						{
+							"key": "api_key",
+							"value": "{{key_nasa}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Star Date - End Date",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"apod\", \"https://api.nasa.gov/planetary/apod\");",
+							"pm.environment.set(\"key_nasa\", \"DyPmd2xRBk0Qb9tqf1rLTsPZW9UnNC5mqfnawvOa\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Validate Response Body\", function () {",
+							"    const data = pm.response.json();",
+							"    pm.expect(data).to.be.an('array');",
+							"",
+							"    data.forEach(item => {",
+							"        pm.expect(typeof item.date).to.eql('string'); ",
+							"        pm.expect(typeof item.explanation).to.eql('string'); ",
+							"        pm.expect(typeof item.hdurl).to.eql('string'); ",
+							"        pm.expect(typeof item.media_type).to.eql('string'); ",
+							"        pm.expect(typeof item.service_version).to.eql('string');  ",
+							"        pm.expect(typeof item.title).to.eql('string'); ",
+							"        pm.expect(typeof item.url).to.eql('string'); ",
+							"    });",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apod}}?start_date=2023-07-01&end_date=2023-07-02&api_key={{key_nasa}}",
+					"host": [
+						"{{apod}}"
+					],
+					"query": [
+						{
+							"key": "start_date",
+							"value": "2023-07-01"
+						},
+						{
+							"key": "end_date",
+							"value": "2023-07-02"
+						},
+						{
+							"key": "api_key",
+							"value": "{{key_nasa}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Hd Url",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"apod\", \"https://api.nasa.gov/planetary/apod\");",
+							"pm.environment.set(\"key_nasa\", \"DyPmd2xRBk0Qb9tqf1rLTsPZW9UnNC5mqfnawvOa\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code 200\", function () {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"copyright\", function(){",
+							"    const copyright = pm.response.json().copyright;",
+							"    pm.expect(typeof(copyright)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"date\", function(){",
+							"    const date = pm.response.json().date;",
+							"    pm.expect(typeof(date)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"explanation\", function(){",
+							"    const explanation = pm.response.json().explanation;",
+							"    pm.expect(typeof(explanation)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"hdurl\", function(){",
+							"    const hdurl = pm.response.json().hdurl;",
+							"    pm.expect(typeof(hdurl)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"media_type\", function(){",
+							"    const media_type = pm.response.json().media_type;",
+							"    pm.expect(typeof(media_type)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"service_version\", function(){",
+							"    const service_version = pm.response.json().service_version;",
+							"    pm.expect(typeof(service_version)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"title\", function(){",
+							"    const title = pm.response.json().title;",
+							"    pm.expect(typeof(title)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"url\", function(){",
+							"    const url = pm.response.json().url;",
+							"    pm.expect(typeof(url)).to.eql('string');",
+							"} );"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apod}}?date=2022-01-09&api_key={{key_nasa}}",
+					"host": [
+						"{{apod}}"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2022-01-09"
+						},
+						{
+							"key": "api_key",
+							"value": "{{key_nasa}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Copyright",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"apod\", \"https://api.nasa.gov/planetary/apod\");",
+							"pm.environment.set(\"key_nasa\", \"DyPmd2xRBk0Qb9tqf1rLTsPZW9UnNC5mqfnawvOa\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code 200\", function () {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"copyright\", function(){",
+							"    const copyright = pm.response.json().copyright;",
+							"    pm.expect(typeof(copyright)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"date\", function(){",
+							"    const date = pm.response.json().date;",
+							"    pm.expect(typeof(date)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"explanation\", function(){",
+							"    const explanation = pm.response.json().explanation;",
+							"    pm.expect(typeof(explanation)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"hdurl\", function(){",
+							"    const hdurl = pm.response.json().hdurl;",
+							"    pm.expect(typeof(hdurl)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"media_type\", function(){",
+							"    const media_type = pm.response.json().media_type;",
+							"    pm.expect(typeof(media_type)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"service_version\", function(){",
+							"    const service_version = pm.response.json().service_version;",
+							"    pm.expect(typeof(service_version)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"title\", function(){",
+							"    const title = pm.response.json().title;",
+							"    pm.expect(typeof(title)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"url\", function(){",
+							"    const url = pm.response.json().url;",
+							"    pm.expect(typeof(url)).to.eql('string');",
+							"} );"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apod}}?date=2023-01-09&api_key={{key_nasa}}",
+					"host": [
+						"{{apod}}"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2023-01-09"
+						},
+						{
+							"key": "api_key",
+							"value": "{{key_nasa}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Title - Explanation",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"apod\", \"https://api.nasa.gov/planetary/apod\");",
+							"pm.environment.set(\"key_nasa\", \"DyPmd2xRBk0Qb9tqf1rLTsPZW9UnNC5mqfnawvOa\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code 200\", function () {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"copyright\", function(){",
+							"    const copyright = pm.response.json().copyright;",
+							"    pm.expect(typeof(copyright)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"date\", function(){",
+							"    const date = pm.response.json().date;",
+							"    pm.expect(typeof(date)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"explanation\", function(){",
+							"    const explanation = pm.response.json().explanation;",
+							"    pm.expect(typeof(explanation)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"hdurl\", function(){",
+							"    const hdurl = pm.response.json().hdurl;",
+							"    pm.expect(typeof(hdurl)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"media_type\", function(){",
+							"    const media_type = pm.response.json().media_type;",
+							"    pm.expect(typeof(media_type)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"service_version\", function(){",
+							"    const service_version = pm.response.json().service_version;",
+							"    pm.expect(typeof(service_version)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"title\", function(){",
+							"    const title = pm.response.json().title;",
+							"    pm.expect(typeof(title)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"url\", function(){",
+							"    const url = pm.response.json().url;",
+							"    pm.expect(typeof(url)).to.eql('string');",
+							"} );"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apod}}?date=2022-10-13&api_key={{key_nasa}}",
+					"host": [
+						"{{apod}}"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2022-10-13"
+						},
+						{
+							"key": "api_key",
+							"value": "{{key_nasa}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Error",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"apod\", \"https://api.nasa.gov/planetary/apod\");",
+							"pm.environment.set(\"key_nasa\", \"DyPmd2xRBk0Qb9tqf1rLTsPZW9UnNC5mqfnawvOa\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code 400\", function () {",
+							"    pm.response.to.have.status(400)",
+							"})",
+							"",
+							"pm.test(\"msg\", function(){",
+							"    const msg = pm.response.json().msg;",
+							"    pm.expect(typeof(msg)).to.eql('string');",
+							"} );",
+							"",
+							"pm.test(\"service_version\", function(){",
+							"    const service_version = pm.response.json().service_version;",
+							"    pm.expect(typeof(service_version)).to.eql('string');",
+							"} );"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apod}}?date=2022-10-&api_key={{key_nasa}}",
+					"host": [
+						"{{apod}}"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2022-10-"
+						},
+						{
+							"key": "api_key",
+							"value": "{{key_nasa}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
