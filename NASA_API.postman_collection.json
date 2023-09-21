@@ -1,0 +1,1465 @@
+{
+	"info": {
+		"_postman_id": "ae37beb9-3aea-4f2d-88ab-66cfad723914",
+		"name": "NASA",
+		"description": "Esta colección de pruebas está diseñada para automatizar y verificar las solicitudes de API proporcionadas por la NASA. Aquí encontrarás una serie de pruebas que garantizarán la integridad y la precisión de los datos proporcionados por las API de la NASA.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "28224987"
+	},
+	"item": [
+		{
+			"name": "Donki WSA",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Status code 200', function () {",
+							"    pm.response.to.have.status(200);",
+							"})",
+							"",
+							"pm.test('Data', function () {",
+							"    const data = pm.response.json();",
+							"    pm.expect(data).to.be.an('array');",
+							"})",
+							"",
+							"pm.test('Data structure', function () {",
+							"    const data = pm.response.json();",
+							"    data.forEach(item => {",
+							"        pm.expect(item).to.have.property('simulationID').that.is.a('string');",
+							"        pm.expect(item).to.have.property('modelCompletionTime').that.is.a('string');",
+							"        pm.expect(item).to.have.property('au').that.is.a('number');",
+							"        pm.expect(item).to.have.property('cmeInputs').that.is.an('array');",
+							"        pm.expect(item.cmeInputs[0]).to.have.property('cmeStartTime').that.is.an('string');",
+							"        pm.expect(item.cmeInputs[0]).to.have.property('latitude').that.is.an('number');",
+							"        pm.expect(item.cmeInputs[0]).to.have.property('longitude').that.is.an('number');",
+							"        pm.expect(item.cmeInputs[0]).to.have.property('speed').that.is.an('number');",
+							"        pm.expect(item.cmeInputs[0]).to.have.property('halfAngle').that.is.an('number');",
+							"        pm.expect(item.cmeInputs[0]).to.have.property('time21_5').that.is.an('string');",
+							"        pm.expect(item.cmeInputs[0]).to.have.property('isMostAccurate').that.is.an('boolean');",
+							"        pm.expect(item.cmeInputs[0]).to.have.property('levelOfData').that.is.an('number');",
+							"        pm.expect(item.cmeInputs[0]).to.have.property('ipsList').that.is.an('array');",
+							"    });",
+							"})",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.nasa.gov/DONKI/WSAEnlilSimulations?startDate=2016-01-06&endDate=2016-01-06&api_key={{key_nasa}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nasa",
+						"gov"
+					],
+					"path": [
+						"DONKI",
+						"WSAEnlilSimulations"
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "2016-01-06"
+						},
+						{
+							"key": "endDate",
+							"value": "2016-01-06"
+						},
+						{
+							"key": "api_key",
+							"value": "{{key_nasa}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fireball",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Signature\", function () {",
+							"    const responseData = pm.response.json();",
+							"",
+							"    pm.expect(responseData.signature).to.exist.and.to.be.an('object');",
+							"    pm.expect(typeof(responseData.signature.version)).to.eql('string');",
+							"     pm.expect(typeof(responseData.signature.source)).to.eql('string');",
+							"});",
+							"",
+							"pm.test(\"Count\", function(){",
+							"    const count = pm.response.json().count;",
+							"    pm.expect(typeof(count)).to.eql('string');",
+							"})",
+							"",
+							"pm.test(\"fields\", function(){",
+							"    const fields = pm.response.json().fields;",
+							"    pm.expect(fields).to.be.an('array').with.lengthOf(9);",
+							"",
+							"    fields.forEach(field => {",
+							"        pm.expect(typeof field).to.eql('string');",
+							"    });",
+							"});",
+							"",
+							"/*pm.test(\"data structure\", function () {",
+							"    const data = pm.response.json().data;",
+							"    pm.expect(data).to.be.an('array');",
+							"",
+							"    data.forEach(item => {",
+							"        pm.expect(item).to.be.an('array').with.lengthOf(9);",
+							"        item.forEach(value => {",
+							"            pm.expect(typeof(item[0])).to.eql('string');",
+							"            pm.expect(typeof(item[1])).to.eql('string');",
+							"            pm.expect(typeof(item[2])).to.eql('string');",
+							"            pm.expect(typeof(item[3])).to.eql('string');",
+							"            pm.expect(typeof(item[4])).to.eql('string');",
+							"            pm.expect(typeof(item[5])).to.eql('string');",
+							"            pm.expect(typeof(item[6])).to.eql('string');",
+							"            pm.expect(typeof(item[7])).to.eql('string');",
+							"            ",
+							"        });",
+							"    });",
+							"});*/",
+							"",
+							"/*pm.test(\"data structure\", function () {",
+							"    const data = pm.response.json().data;",
+							"    pm.expect(data).to.be.an('array');",
+							"",
+							"    data.forEach(item => {",
+							"        pm.expect(item).to.be.an('array').with.lengthOf(9);",
+							"",
+							"        item.forEach(value => {",
+							"            pm.expect(typeof value).to.eql('string');",
+							"        });",
+							"    });",
+							"});*/",
+							"",
+							"pm.test(\"data structure\", function () {",
+							"    const data = pm.response.json().data;",
+							"    pm.expect(data).to.be.an('array');",
+							"",
+							"    data.forEach(item => {",
+							"        pm.expect(item).to.be.an('array').with.lengthOf(9);",
+							"",
+							"        item.forEach(value => {",
+							"            pm.expect(value === null || typeof value === 'string').to.be.true;",
+							"        }); ",
+							"",
+							"       /* item.forEach(value => {",
+							"            pm.expect('string','null','boolean').to.include(typeof value);",
+							"        }); */",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://ssd-api.jpl.nasa.gov/fireball.api?limit=5",
+					"protocol": "https",
+					"host": [
+						"ssd-api",
+						"jpl",
+						"nasa",
+						"gov"
+					],
+					"path": [
+						"fireball.api"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Donki CME",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code 200\", function () {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"Data array\", function () {",
+							"    const response = pm.response.json();",
+							"    pm.expect(response).to.be.an('array');",
+							"});",
+							"",
+							"pm.test(\"Data structure\", function () {",
+							"    const data = pm.response.json();",
+							"",
+							"    data.forEach(item => {",
+							"",
+							"        pm.expect(item).to.have.property('time21_5').that.is.a('string');",
+							"        pm.expect(item).to.have.property('latitude').that.is.a('number');",
+							"        pm.expect(item).to.have.property('longitude').that.is.a('number');",
+							"        pm.expect(item).to.have.property('halfAngle').that.is.a('number');",
+							"        pm.expect(item).to.have.property('speed').that.is.a('number');",
+							"        pm.expect(item).to.have.property('type').that.is.a('string');",
+							"        pm.expect(item).to.have.property('isMostAccurate').that.is.a('boolean');",
+							"        pm.expect(item).to.have.property('associatedCMEID').that.is.a('string');",
+							"        pm.expect(item).to.have.property('note').that.is.a('string');",
+							"        pm.expect(item).to.have.property('catalog').that.is.a('string');",
+							"        pm.expect(item).to.have.property('link').that.is.a('string');",
+							"",
+							"    });",
+							"",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.nasa.gov/DONKI/CMEAnalysis?startDate=2016-09-01&endDate=2016-09-30&mostAccurateOnly=true&speed=500&halfAngle=30&catalog=ALL&api_key={{key_nasa}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nasa",
+						"gov"
+					],
+					"path": [
+						"DONKI",
+						"CMEAnalysis"
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "2016-09-01"
+						},
+						{
+							"key": "endDate",
+							"value": "2016-09-30"
+						},
+						{
+							"key": "mostAccurateOnly",
+							"value": "true"
+						},
+						{
+							"key": "speed",
+							"value": "500"
+						},
+						{
+							"key": "halfAngle",
+							"value": "30"
+						},
+						{
+							"key": "catalog",
+							"value": "ALL"
+						},
+						{
+							"key": "api_key",
+							"value": "{{key_nasa}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Donki IPS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Status code 200', function () {",
+							"    pm.response.to.have.status(200);",
+							"})",
+							"",
+							"pm.test('Data array', function () {",
+							"    const response = pm.response.json();",
+							"    pm.expect(response).to.be.an('array');",
+							"})",
+							"",
+							"pm.test(\"Data structure\", function () {",
+							"    const data = pm.response.json();",
+							"",
+							"    data.forEach(item => {",
+							"        pm.expect(item).to.have.property('catalog').that.is.a('string');",
+							"        pm.expect(item).to.have.property('activityID').that.is.a('string');",
+							"        pm.expect(item).to.have.property('location').that.is.a('string');",
+							"        pm.expect(item).to.have.property('eventTime').that.is.a('string');",
+							"        pm.expect(item).to.have.property('link').that.is.a('string');",
+							"        pm.expect(item).to.have.property('instruments').that.is.an('array');",
+							"        pm.expect(item.instruments[0]).to.have.property('displayName').that.is.a('string');",
+							"        pm.expect(item.instruments[1]).to.have.property('displayName').that.is.a('string');",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.nasa.gov/DONKI/IPS?startDate=2016-01-01&endDate=2016-01-30&api_key={{key_nasa}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nasa",
+						"gov"
+					],
+					"path": [
+						"DONKI",
+						"IPS"
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "2016-01-01"
+						},
+						{
+							"key": "endDate",
+							"value": "2016-01-30"
+						},
+						{
+							"key": "api_key",
+							"value": "{{key_nasa}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Donki GTS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code 200\", function () {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"data\", function () {",
+							"    const data = pm.response.json();",
+							"    pm.expect(data).to.be.an('array');",
+							"",
+							"});",
+							"",
+							"pm.test(\"Data structure\", function () {",
+							"    const data = pm.response.json();",
+							"",
+							"    data.forEach(item => {",
+							"         pm.expect(item).to.have.property('gstID').that.is.a('string');",
+							"         pm.expect(item).to.have.property('startTime').that.is.a('string');",
+							"         pm.expect(item).to.have.property('allKpIndex').that.is.an('array');",
+							"         pm.expect(item.allKpIndex[0]).to.have.property('observedTime').that.is.a('string');",
+							"         pm.expect(item.allKpIndex[0]).to.have.property('kpIndex').that.is.a('number');",
+							"         pm.expect(item.allKpIndex[0]).to.have.property('source').that.is.a('string');",
+							"         pm.expect(item.allKpIndex[1]).to.have.property('observedTime').that.is.a('string');",
+							"         pm.expect(item.allKpIndex[1]).to.have.property('kpIndex').that.is.a('number');",
+							"         pm.expect(item.allKpIndex[1]).to.have.property('source').that.is.a('string');",
+							"         pm.expect(item).to.have.property('linkedEvents').that.is.an('array');",
+							"         pm.expect(item.linkedEvents[0]).to.have.property('activityID').that.is.a('string');",
+							"         pm.expect(item).to.have.property('link').that.is.a('string');",
+							"",
+							"        ",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.nasa.gov/DONKI/GST?startDate=2017-03-01&endDate=2017-03-30&api_key={{key_nasa}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nasa",
+						"gov"
+					],
+					"path": [
+						"DONKI",
+						"GST"
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "2017-03-01"
+						},
+						{
+							"key": "endDate",
+							"value": "2017-03-30"
+						},
+						{
+							"key": "api_key",
+							"value": "{{key_nasa}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Donki FLR",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Status code 200', function () {",
+							"    pm.response.to.have.status(200);",
+							"})",
+							"",
+							"pm.test('Response body is an array', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData).to.be.an('array');",
+							"})",
+							"",
+							"pm.test(\"Data structure\", function () {",
+							"    const data = pm.response.json();",
+							"",
+							"    data.forEach(item => {",
+							"        pm.expect(item).to.have.property('flrID').that.is.a('string');",
+							"        pm.expect(item).to.have.property('instruments').that.is.an('array');",
+							"        pm.expect(item.instruments[0]).to.have.property('displayName').that.is.an('string');",
+							"        pm.expect(item).to.have.property('beginTime').that.is.a('string');",
+							"        pm.expect(item).to.have.property('peakTime').that.is.a('string');",
+							"        pm.expect(item).to.have.property('endTime').that.satisfies(value => typeof value === 'string' || value === null);",
+							"        pm.expect(item).to.have.property('classType').that.is.a('string');",
+							"        pm.expect(item).to.have.property('sourceLocation').that.is.a('string');",
+							"        pm.expect(item).to.have.property('activeRegionNum').that.is.a('number');",
+							"        pm.expect(item).to.have.property('link').that.is.a('string');",
+							"",
+							"",
+							"    });",
+							"});",
+							"",
+							"pm.test(\"linkedEvents and properties\", function () {",
+							"    const responseData = pm.response.json();",
+							"    responseData.forEach(item => {",
+							"        pm.expect(item).to.have.property('linkedEvents').that.is.an('array');",
+							"",
+							"        item.linkedEvents.forEach(event => {",
+							"            pm.expect(event).to.have.property('activityID').that.is.a('string');",
+							"        });",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.nasa.gov/DONKI/FLR?startDate=2016-01-01&endDate=2016-01-30&api_key={{key_nasa}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nasa",
+						"gov"
+					],
+					"path": [
+						"DONKI",
+						"FLR"
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "2016-01-01"
+						},
+						{
+							"key": "endDate",
+							"value": "2016-01-30"
+						},
+						{
+							"key": "api_key",
+							"value": "{{key_nasa}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Donki SEP",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code 200\", function () {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"data\", function () {",
+							"    const data = pm.response.json();",
+							"    pm.expect(data).to.be.an('array');",
+							"",
+							"});",
+							"",
+							"pm.test(\"Data structure\", function () {",
+							"    const data = pm.response.json();",
+							"",
+							"    data.forEach(item => {",
+							"",
+							"        pm.expect(item).to.have.property('sepID').that.is.a('string');",
+							"        pm.expect(item).to.have.property('eventTime').that.is.a('string');",
+							"        pm.expect(item).to.have.property('instruments').that.is.an('array');",
+							"        pm.expect(item.instruments[0]).to.have.property('displayName').that.is.an('string');",
+							"        pm.expect(item).to.have.property('linkedEvents').that.is.an('array');",
+							"        pm.expect(item.linkedEvents[0]).to.have.property('activityID').that.is.an('string');",
+							"        pm.expect(item.linkedEvents[1]).to.have.property('activityID').that.is.an('string');",
+							"        pm.expect(item).to.have.property('link').that.is.a('string');",
+							"        ",
+							"   });",
+							"});     "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.nasa.gov/DONKI/SEP?startDate=2016-01-01&endDate=2016-01-30&api_key={{key_nasa}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nasa",
+						"gov"
+					],
+					"path": [
+						"DONKI",
+						"SEP"
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "2016-01-01"
+						},
+						{
+							"key": "endDate",
+							"value": "2016-01-30"
+						},
+						{
+							"key": "api_key",
+							"value": "{{key_nasa}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Donki HSS",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code 200\", function () {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"Data\", function () {",
+							"    const data = pm.response.json();",
+							"    pm.expect(data).to.be.an('array');",
+							"",
+							"});",
+							"",
+							"pm.test(\"Data structure\", function () {",
+							"    const data = pm.response.json();",
+							"",
+							"    data.forEach(item => {",
+							"",
+							"        pm.expect(item).to.have.property('hssID').that.is.a('string');",
+							"        pm.expect(item).to.have.property('eventTime').that.is.a('string');",
+							"        pm.expect(item).to.have.property('instruments').that.is.an('array');",
+							"        pm.expect(item.instruments[0]).to.have.property('displayName').that.is.an('string');",
+							"        pm.expect(item.instruments[1]).to.have.property('displayName').that.is.an('string');",
+							"        pm.expect(item).to.have.property('link').that.is.an('string');",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.nasa.gov/DONKI/HSS?startDate=2016-01-01&endDate=2016-01-31&api_key={{key_nasa}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nasa",
+						"gov"
+					],
+					"path": [
+						"DONKI",
+						"HSS"
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "2016-01-01"
+						},
+						{
+							"key": "endDate",
+							"value": "2016-01-31"
+						},
+						{
+							"key": "api_key",
+							"value": "{{key_nasa}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Donnki MPC",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code 200\", function () {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"Data\", function () {",
+							"    const data = pm.response.json();",
+							"    pm.expect(data).to.be.an('array');",
+							"",
+							"});",
+							"",
+							"pm.test(\"Data structure\", function () {",
+							"    const data = pm.response.json();",
+							"",
+							"    data.forEach(item => {",
+							"",
+							"        pm.expect(item).to.have.property('mpcID').that.is.a('string');",
+							"        pm.expect(item).to.have.property('eventTime').that.is.a('string');",
+							"        pm.expect(item).to.have.property('instruments').that.is.an('array');",
+							"        pm.expect(item.instruments[0]).to.have.property('displayName').that.is.an('string');",
+							"        pm.expect(item).to.have.property('linkedEvents').that.is.an('array');",
+							"        pm.expect(item).to.have.property('link').that.is.a('string');",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.nasa.gov/DONKI/MPC?startDate=2016-01-01&endDate=2016-03-31&api_key={{key_nasa}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nasa",
+						"gov"
+					],
+					"path": [
+						"DONKI",
+						"MPC"
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "2016-01-01"
+						},
+						{
+							"key": "endDate",
+							"value": "2016-03-31"
+						},
+						{
+							"key": "api_key",
+							"value": "{{key_nasa}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Donki RBE",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code 200\", function () {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"Data\", function () {",
+							"    const data = pm.response.json();",
+							"    pm.expect(data).to.be.an('array');",
+							"",
+							"});",
+							"",
+							"pm.test(\"Data structure\", function () {",
+							"    const data = pm.response.json();",
+							"",
+							"    data.forEach(item => {",
+							"",
+							"        pm.expect(item).to.have.property('rbeID').that.is.a('string');",
+							"        pm.expect(item).to.have.property('eventTime').that.is.a('string');",
+							"        pm.expect(item).to.have.property('instruments').that.is.an('array');",
+							"        pm.expect(item.instruments[0]).to.have.property('displayName').that.is.an('string');",
+							"        pm.expect(item).to.have.property('linkedEvents').that.is.an('array');",
+							"        pm.expect(item.linkedEvents[0]).to.have.property('activityID').that.is.an('string');",
+							"        pm.expect(item).to.have.property('link').that.is.a('string');",
+							"        pm.expect(item.instruments).to.have.lengthOf.at.least(1);",
+							"        ",
+							"   });",
+							"});     "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.nasa.gov/DONKI/RBE?startDate=2016-01-01&endDate=2016-01-31&api_key={{key_nasa}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nasa",
+						"gov"
+					],
+					"path": [
+						"DONKI",
+						"RBE"
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "2016-01-01"
+						},
+						{
+							"key": "endDate",
+							"value": "2016-01-31"
+						},
+						{
+							"key": "api_key",
+							"value": "{{key_nasa}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Epic Natural",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code 200\", function () {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"Data\", function () {",
+							"    const data = pm.response.json();",
+							"    pm.expect(data).to.be.an('array');",
+							"",
+							"});",
+							"",
+							"pm.test(\"Data structure\", function () {",
+							"    const data = pm.response.json();",
+							"",
+							"    data.forEach(item => {",
+							"",
+							"        pm.expect(item).to.have.property('identifier').that.is.a('string');",
+							"        pm.expect(item).to.have.property('caption').that.is.a('string');",
+							"        pm.expect(item).to.have.property('image').that.is.a('string');",
+							"        pm.expect(item).to.have.property('version').that.is.a('string');",
+							"        pm.expect(item.centroid_coordinates).to.have.property('lat').that.is.a('number');",
+							"        pm.expect(item.centroid_coordinates).to.have.property('lon').that.is.a('number');",
+							"        pm.expect(item.dscovr_j2000_position).to.have.property('x').that.is.a('number');",
+							"        pm.expect(item.dscovr_j2000_position).to.have.property('y').that.is.a('number');",
+							"        pm.expect(item.dscovr_j2000_position).to.have.property('z').that.is.a('number');",
+							"        pm.expect(item.lunar_j2000_position).to.have.property('x').that.is.a('number');",
+							"        pm.expect(item.lunar_j2000_position).to.have.property('y').that.is.a('number');",
+							"        pm.expect(item.lunar_j2000_position).to.have.property('z').that.is.a('number');",
+							"        pm.expect(item.sun_j2000_position).to.have.property('x').that.is.a('number');",
+							"        pm.expect(item.sun_j2000_position).to.have.property('y').that.is.a('number');",
+							"        pm.expect(item.sun_j2000_position).to.have.property('z').that.is.a('number');",
+							"        pm.expect(item.attitude_quaternions).to.have.property('q0').that.is.a('number');",
+							"        pm.expect(item.attitude_quaternions).to.have.property('q1').that.is.a('number');",
+							"        pm.expect(item.attitude_quaternions).to.have.property('q2').that.is.a('number');",
+							"        pm.expect(item.attitude_quaternions).to.have.property('q3').that.is.a('number');",
+							"        pm.expect(item).to.have.property('date').that.is.a('string');",
+							"",
+							"   });",
+							"});     "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.nasa.gov/EPIC/api/natural/date/2019-05-30?api_key={{key_nasa}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nasa",
+						"gov"
+					],
+					"path": [
+						"EPIC",
+						"api",
+						"natural",
+						"date",
+						"2019-05-30"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "{{key_nasa}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Genelab Data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code 200\", function () {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"Data\", function () {",
+							"    const data = pm.response.json();",
+							"    pm.expect(data).to.be.an('object');",
+							"",
+							"});",
+							"",
+							"pm.test(\"Data properties\", function(){",
+							"    const data = pm.response.json();",
+							"",
+							"    pm.expect(data.hits).to.be.an('number');",
+							"    pm.expect(data.input).to.be.an('string');",
+							"    pm.expect(data.page_number).to.be.an('number');",
+							"    pm.expect(data.page_size).to.be.an('number');",
+							"    pm.expect(data.page_total).to.be.an('number');",
+							"    pm.expect(data.success).to.be.an('boolean');",
+							"    pm.expect(data.total_hits).to.be.an('number');",
+							"    pm.expect(data.valid_input).to.be.an('array');",
+							"    pm.expect(data.valid_input[0]).to.be.an('string')",
+							"",
+							"})",
+							"",
+							"pm.test(\"Studies properties\", function(){",
+							"    const studies = pm.response.json().studies",
+							"",
+							"    pm.expect(studies).to.be.an('object');",
+							"    ",
+							"})",
+							"",
+							"pm.test(\"properties OSD-87, study\", function () {",
+							"    const study = pm.response.json().studies['OSD-87'];",
+							"",
+							"    pm.expect(study).to.have.property('file_count').that.is.a('number');",
+							"    pm.expect(study).to.have.property('study_files').that.is.an('array');",
+							"",
+							"    study.study_files.forEach(file => {",
+							"        pm.expect(file).to.have.property('category').that.is.a('string');",
+							"        pm.expect(file).to.have.property('date_created').that.is.a('number');",
+							"        pm.expect(file).to.have.property('file_name').that.is.a('string');",
+							"        pm.expect(file).to.have.property('file_size').that.is.a('number');",
+							"        pm.expect(file).to.have.property('organization').that.is.a('string');",
+							"        pm.expect(file).to.have.property('remote_url').that.is.a('string');",
+							"        pm.expect(file).to.have.property('subcategory').that.is.a('string');",
+							"        pm.expect(file).to.have.property('subdirectory').that.is.a('string');",
+							"        pm.expect(file).to.have.property('visible').that.is.a('boolean');",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://genelab-data.ndc.nasa.gov/genelab/data/glds/files/87"
+			},
+			"response": []
+		},
+		{
+			"name": "Insight Weather",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code 200\", function () {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"Response has 'sol_keys' and 'validity_checks' properties\", function () {",
+							"    const response = pm.response.json();",
+							"    pm.expect(response).to.have.property('sol_keys').that.is.an('array');",
+							"    pm.expect(response).to.have.property('validity_checks').that.is.an('object');",
+							"});",
+							"",
+							"pm.test(\"validity_checks\", function () {",
+							"    const validityChecks = pm.response.json().validity_checks;",
+							"",
+							"    pm.expect(validityChecks).to.have.property('sol_hours_required').that.is.a('number');",
+							"    pm.expect(validityChecks).to.have.property('sols_checked').that.is.an('array');",
+							"",
+							"    for (const solKey in validityChecks) {",
+							"        if (solKey !== 'sol_hours_required' && solKey !== 'sols_checked') {",
+							"            const solData = validityChecks[solKey];",
+							"",
+							"            pm.expect(solData).to.have.property('AT').that.is.an('object');",
+							"            pm.expect(solData).to.have.property('HWS').that.is.an('object');",
+							"            pm.expect(solData).to.have.property('PRE').that.is.an('object');",
+							"            pm.expect(solData).to.have.property('WD').that.is.an('object');",
+							"",
+							"            for (const param in solData) {",
+							"                const paramData = solData[param];",
+							"",
+							"                pm.expect(paramData).to.have.property('sol_hours_with_data').that.is.an('array');",
+							"                pm.expect(paramData).to.have.property('valid').that.is.a('boolean');",
+							"            }",
+							"        }",
+							"    }",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.nasa.gov/insight_weather/?api_key={{key_nasa}}&feedtype=json&ver=1.0",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nasa",
+						"gov"
+					],
+					"path": [
+						"insight_weather",
+						""
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "{{key_nasa}}"
+						},
+						{
+							"key": "feedtype",
+							"value": "json"
+						},
+						{
+							"key": "ver",
+							"value": "1.0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mars Photos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Status code 200', function () {",
+							"    pm.response.to.have.status(200);",
+							"})",
+							"",
+							"pm.test('Photos is an array', function () {",
+							"    const photos = pm.response.json().photos;",
+							"    pm.expect(photos).that.is.a('array');",
+							"})",
+							"",
+							"pm.test(\"Properties of photos\", function () {",
+							"    const properties = pm.response.json().photos",
+							"",
+							"    properties.forEach(item => {",
+							"        pm.expect(item).to.have.property('id').that.is.a('number');",
+							"        pm.expect(item).to.have.property('sol').that.is.a('number');",
+							"        pm.expect(item).to.have.property('camera').that.is.a('object');",
+							"        pm.expect(item.camera).to.have.property('id').that.is.a('number');",
+							"        pm.expect(item.camera).to.have.property('name').that.is.a('string');",
+							"        pm.expect(item.camera).to.have.property('rover_id').that.is.a('number');",
+							"        pm.expect(item.camera).to.have.property('full_name').that.is.a('string');",
+							"        pm.expect(item).to.have.property('img_src').that.is.a('string');",
+							"        pm.expect(item).to.have.property('earth_date').that.is.a('string');",
+							"        pm.expect(item).to.have.property('rover').that.is.a('object');",
+							"        pm.expect(item.rover).to.have.property('id').that.is.a('number');",
+							"        pm.expect(item.rover).to.have.property('name').that.is.a('string');",
+							"        pm.expect(item.rover).to.have.property('landing_date').that.is.a('string');",
+							"        pm.expect(item.rover).to.have.property('launch_date').that.is.a('string');",
+							"        pm.expect(item.rover).to.have.property('status').that.is.a('string');",
+							"        pm.expect(item.rover).to.have.property('max_sol').that.is.a('number');",
+							"        pm.expect(item.rover).to.have.property('max_date').that.is.a('string');",
+							"        pm.expect(item.rover).to.have.property('total_photos').that.is.a('number');",
+							"        pm.expect(item.rover).to.have.property('cameras').that.is.a('array');",
+							"",
+							"        item.rover.cameras.forEach(file => {",
+							"            pm.expect(file).to.have.property('name').that.is.a('string');",
+							"            pm.expect(file).to.have.property('full_name').that.is.a('string');",
+							"",
+							"        })",
+							"",
+							"    });",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2015-6-3&api_key={{key_nasa}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nasa",
+						"gov"
+					],
+					"path": [
+						"mars-photos",
+						"api",
+						"v1",
+						"rovers",
+						"curiosity",
+						"photos"
+					],
+					"query": [
+						{
+							"key": "earth_date",
+							"value": "2015-6-3"
+						},
+						{
+							"key": "api_key",
+							"value": "{{key_nasa}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TechTransfer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code 200\", function () {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"Response properties\", function () {",
+							"    const responseData = pm.response.json();",
+							"",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.results).to.exist.and.to.be.a('array');",
+							"    pm.expect(responseData.count).to.exist.and.to.be.a('number');",
+							"    pm.expect(responseData.total).to.exist.and.to.be.a('number');",
+							"    pm.expect(responseData.perpage).to.exist.and.to.be.a('number');",
+							"    pm.expect(responseData.page).to.exist.and.to.be.a('number');",
+							"});",
+							"",
+							"pm.test(\"array is present and contains at least one element\", function () {",
+							"    const responseData = pm.response.json();",
+							"",
+							"    pm.expect(responseData.results).to.exist.and.to.be.an('array').with.lengthOf.at.least(1);",
+							"});",
+							"",
+							"pm.test(\"Check properties of each result\", function () {",
+							"    const results = pm.response.json().results;",
+							"",
+							"    results.forEach(result => {",
+							"        pm.expect(result).to.be.an('array').with.lengthOf(13);",
+							"",
+							"        pm.expect(result[0]).to.be.a('string');",
+							"        pm.expect(result[1]).to.be.a('string');",
+							"        pm.expect(result[2]).to.be.a('string');",
+							"        pm.expect(result[3]).to.be.a('string');",
+							"        pm.expect(result[4]).to.be.a('string');",
+							"        pm.expect(result[5]).to.be.a('string');",
+							"        pm.expect(result[6]).to.be.a('string');",
+							"        pm.expect(result[7]).to.be.a('string');",
+							"        pm.expect(result[8]).to.be.a('string');",
+							"        pm.expect(result[9]).to.be.a('string');",
+							"        pm.expect(result[10]).to.be.a('string');",
+							"        pm.expect(result[11]).to.be.a('string');",
+							"        pm.expect(result[12]).to.be.a('number');",
+							"",
+							"    });",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.nasa.gov/techtransfer/patent/?engine&api_key={{key_nasa}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nasa",
+						"gov"
+					],
+					"path": [
+						"techtransfer",
+						"patent",
+						""
+					],
+					"query": [
+						{
+							"key": "engine",
+							"value": null
+						},
+						{
+							"key": "api_key",
+							"value": "{{key_nasa}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TLE",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code 200\", function () {",
+							"    pm.response.to.have.status(200)",
+							"});",
+							"",
+							"pm.test(\"Properties\", function(){",
+							"    const propertie = pm.response.json()",
+							"",
+							"    pm.expect(propertie).to.have.property('@context').that.is.a('string');",
+							"    pm.expect(propertie).to.have.property('@id').that.is.a('string');",
+							"    pm.expect(propertie).to.have.property('@type').that.is.a('string');",
+							"    pm.expect(propertie).to.have.property('totalItems').that.is.a('number');",
+							"});",
+							"",
+							"pm.test(\"properties member\", function(){",
+							"    const member = pm.response.json().member",
+							"",
+							"    member.forEach(item => {",
+							"        pm.expect(item).to.have.property('@id').that.is.a('string');",
+							"        pm.expect(item).to.have.property('@type').that.is.a('string');",
+							"        pm.expect(item).to.have.property('satelliteId').that.is.a('number');",
+							"        pm.expect(item).to.have.property('name').that.is.a('string');",
+							"        pm.expect(item).to.have.property('date').that.is.a('string');",
+							"        pm.expect(item).to.have.property('line1').that.is.a('string');",
+							"        pm.expect(item).to.have.property('line2').that.is.a('string');",
+							"",
+							"    });",
+							"});",
+							"",
+							"pm.test(\"properties parameters\", function(){",
+							"    const parameters = pm.response.json().parameters",
+							"",
+							"    pm.expect(parameters).to.have.property('search').that.is.a('string');",
+							"    pm.expect(parameters).to.have.property('sort').that.is.a('string');",
+							"    pm.expect(parameters).to.have.property('sort-dir').that.is.a('string');",
+							"    pm.expect(parameters).to.have.property('page').that.is.a('number');",
+							"    pm.expect(parameters).to.have.property('page-size').that.is.a('number');",
+							"})",
+							"",
+							"pm.test(\"properties view\", function(){",
+							"    const view = pm.response.json().view",
+							"",
+							"    pm.expect(view).to.have.property('@id').that.is.a('string');",
+							"    pm.expect(view).to.have.property('@type').that.is.a('string');",
+							"    pm.expect(view).to.have.property('first').that.is.a('string');",
+							"    pm.expect(view).to.have.property('next').that.is.a('string');",
+							"    pm.expect(view).to.have.property('last').that.is.a('string');",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://tle.ivanstanojevic.me/api/tle"
+			},
+			"response": []
+		},
+		{
+			"name": "Neo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code 200\", function () {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"Properties\", function(){",
+							"    const propertie = pm.response.json()",
+							"",
+							"    pm.expect(propertie).to.have.property('links').that.is.a('object');",
+							"    pm.expect(propertie.links).to.have.property('self').that.is.a('string');",
+							"    pm.expect(propertie).to.have.property('id').that.is.a('string');",
+							"    pm.expect(propertie).to.have.property('neo_reference_id').that.is.a('string');",
+							"    pm.expect(propertie).to.have.property('name').that.is.a('string');",
+							"    pm.expect(propertie).to.have.property('designation').that.is.a('string');",
+							"    pm.expect(propertie).to.have.property('nasa_jpl_url').that.is.a('string');",
+							"    pm.expect(propertie).to.have.property('absolute_magnitude_h').that.is.a('number');",
+							"    pm.expect(propertie).to.have.property('is_potentially_hazardous_asteroid').that.is.a('boolean');",
+							"});",
+							"",
+							"pm.test(\"PropertiesED\", function(){",
+							"    const propertieED = pm.response.json().estimated_diameter",
+							"",
+							"    pm.expect(propertieED).to.have.property('kilometers').that.is.a('object');",
+							"    pm.expect(propertieED.kilometers).to.have.property('estimated_diameter_min').that.is.a('number');",
+							"    pm.expect(propertieED.kilometers).to.have.property('estimated_diameter_max').that.is.a('number');",
+							"    pm.expect(propertieED).to.have.property('meters').that.is.a('object');",
+							"    pm.expect(propertieED.meters).to.have.property('estimated_diameter_min').that.is.a('number');",
+							"    pm.expect(propertieED.meters).to.have.property('estimated_diameter_max').that.is.a('number');",
+							"    pm.expect(propertieED).to.have.property('miles').that.is.a('object');",
+							"    pm.expect(propertieED.miles).to.have.property('estimated_diameter_min').that.is.a('number');",
+							"    pm.expect(propertieED.miles).to.have.property('estimated_diameter_max').that.is.a('number');",
+							"    pm.expect(propertieED).to.have.property('feet').that.is.a('object');",
+							"    pm.expect(propertieED.feet).to.have.property('estimated_diameter_min').that.is.a('number');",
+							"    pm.expect(propertieED.feet).to.have.property('estimated_diameter_max').that.is.a('number');",
+							"})",
+							"",
+							"pm.test(\"proopertiesCAD\", function(){",
+							"    const cad = pm.response.json().close_approach_data",
+							"    pm.expect(cad).that.is.a('array')",
+							"",
+							"    cad.forEach( item => {",
+							"        pm.expect(item).to.have.property('close_approach_date').that.is.a('string');",
+							"        pm.expect(item).to.have.property('close_approach_date_full').that.is.a('string');",
+							"        pm.expect(item).to.have.property('epoch_date_close_approach').that.is.a('number');",
+							"        pm.expect(item).to.have.property('relative_velocity').that.is.a('object');",
+							"        pm.expect(item.relative_velocity).to.have.property('kilometers_per_second').that.is.a('string');",
+							"        pm.expect(item.relative_velocity).to.have.property('kilometers_per_hour').that.is.a('string');",
+							"        pm.expect(item.relative_velocity).to.have.property('miles_per_hour').that.is.a('string');",
+							"        pm.expect(item).to.have.property('miss_distance').that.is.a('object');",
+							"        pm.expect(item.miss_distance).to.have.property('astronomical').that.is.a('string');",
+							"        pm.expect(item.miss_distance).to.have.property('lunar').that.is.a('string');",
+							"        pm.expect(item.miss_distance).to.have.property('kilometers').that.is.a('string');",
+							"        pm.expect(item.miss_distance).to.have.property('miles').that.is.a('string');",
+							"        pm.expect(item).to.have.property('orbiting_body').that.is.a('string');",
+							"    })",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.nasa.gov/neo/rest/v1/neo/3542519?api_key={{key_nasa}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nasa",
+						"gov"
+					],
+					"path": [
+						"neo",
+						"rest",
+						"v1",
+						"neo",
+						"3542519"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "{{key_nasa}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NeoWs",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Status code 200', function () {",
+							"    pm.response.to.have.status(200);",
+							"})",
+							"",
+							"pm.test('links and element_count', function () {",
+							"    const response = pm.response.json();",
+							"    pm.expect(response).to.have.property('links').that.is.an('object');",
+							"    pm.expect(response).to.have.property('element_count').that.is.a('number');",
+							"})",
+							"",
+							"pm.test('properties links', function () {",
+							"    const links = pm.response.json().links;",
+							"    pm.expect(links).to.have.property('next').that.is.a('string');",
+							"    pm.expect(links).to.have.property('previous').that.is.a('string');",
+							"    pm.expect(links).to.have.property('self').that.is.a('string');",
+							"})",
+							"",
+							"pm.test(\"near earth objects\", function () {",
+							"    const neo = pm.response.json().near_earth_objects;",
+							"    pm.expect(neo['2015-09-08']).to.be.an('array');",
+							"    pm.expect(neo['2015-09-07']).to.be.an('array');",
+							"    ",
+							"",
+							"})",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.nasa.gov/neo/rest/v1/feed?start_date=2015-09-07&end_date=2015-09-08&api_key={{key_nasa}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nasa",
+						"gov"
+					],
+					"path": [
+						"neo",
+						"rest",
+						"v1",
+						"feed"
+					],
+					"query": [
+						{
+							"key": "start_date",
+							"value": "2015-09-07"
+						},
+						{
+							"key": "end_date",
+							"value": "2015-09-08"
+						},
+						{
+							"key": "api_key",
+							"value": "{{key_nasa}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.environment.set(\"key_nasa\", \"DyPmd2xRBk0Qb9tqf1rLTsPZW9UnNC5mqfnawvOa\");",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
